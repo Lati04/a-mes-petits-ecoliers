@@ -13,9 +13,9 @@ export async function OPTIONS() {
   return NextResponse.json({}, { headers: corsHeaders });
 }
 
-// 🔒 mémoire pour limiter les requêtes
+// mémoire pour limiter les requêtes
 const lastSubmissions = new Map<string, number>();
-const RATE_LIMIT_MS = 30_000; // 30 secondes
+const RATE_LIMIT_MS = 30_000;
 
 export async function POST(req: NextRequest) {
   try {
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // 📩 email pour toi
+    // email
     await transporter.sendMail({
       from: `"Site Coloriages" <${process.env.CONTACT_EMAIL}>`,
       to: process.env.CONTACT_EMAIL,
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
       text: `Email de l'utilisateur : ${email}`,
     });
 
-    // 📫 confirmation pour l’utilisateur
+    // confirmation pour l’utilisateur
     await transporter.sendMail({
       from: `"Site Coloriages" <${process.env.CONTACT_EMAIL}>`,
       to: email,
