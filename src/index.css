@@ -1,0 +1,146 @@
+/* ===============================
+   TAILWIND IMPORTS
+================================= */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===============================
+   VARIABLES GLOBALES
+================================= */
+:root {
+  --font-sans: 'Baloo 2', cursive;
+  --gold: #cba95c;
+  --gold-light: #ebce8c;
+  --gold-bg: #fff;
+  --gold-dark-bg: #2b2100;
+  --gray-dark: #3a3a3a;
+  --elevation: 0 6px 18px rgba(224, 175, 71, 0.25);
+}
+
+/* ===============================
+   BASE GLOBALE
+================================= */
+body {
+  @apply font-sans min-w-[320px] min-h-screen;
+  margin: 0;
+  background-color: var(--gold-bg);
+  color: var(--gray-dark);
+  line-height: 1.6;
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===============================
+   TYPOGRAPHIE DORÉE
+================================= */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  background: linear-gradient(90deg, #cba95c 0%, #ebce8c 50%, #cba95c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 { text-shadow: none; }
+h1 { font-size: 3.2em; line-height: 1.1; }
+
+/* ===============================
+   EFFETS LUMINEUX / GLOW
+================================= */
+.glow-frame {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+.glow-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 3px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ebce8c, #00fbff, #ebce8c, #fe01ba, #ebce8c);
+  background-size: 300% 300%;
+  animation: glow-border 10s linear infinite;
+  z-index: -1;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.glow-frame > * {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.8);
+  border-radius: inherit;
+}
+.glow-frame:hover::before {
+  filter: brightness(1.5) drop-shadow(0 0 10px #fff);
+  animation-duration: 3s;
+}
+
+@keyframes glow-border {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Header rainbow */
+.header-rainbow {
+  background: linear-gradient(90deg, #ebce8c, #00fbff, #ebce8c, #fe01ba, #ebce8c);
+  background-size: 300% 300%;
+  animation: rainbow-bg 12s linear infinite;
+}
+@keyframes rainbow-bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===============================
+   STYLE DORÉ ✨
+================================= */
+.text-gold-gradient {
+  background: linear-gradient(90deg, #cba95c 0%, #ebce8c 50%, #cba95c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.text-normal {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: initial !important;
+  color: #1f2937 !important;
+}
+.shadow-gold {
+  box-shadow: 0 6px 15px rgba(224, 175, 71, 0.3);
+}
+.no-bg { background: transparent !important; }
+
+/* ===============================
+   MODALES / ANIMATIONS
+================================= */
+.animate-fadeIn { animation: fadeIn 0.25s ease-out forwards; }
+.animate-fadeOut { animation: fadeOut 0.25s ease-out forwards; }
+.animate-scaleIn { animation: scaleIn 0.25s ease-out forwards; }
+.animate-scaleOut { animation: scaleOut 0.25s ease-out forwards; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes scaleOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.95); } }
+
+.modal-backdrop {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* ===============================
+   MODE CLAIR / FONCÉ
+================================= */
+@media (prefers-color-scheme: light) {
+  body { background-color: var(--gold-bg); color: var(--gray-dark); }
+  .card, .sidebar { background: linear-gradient(145deg, #fffefb, #fef6e8); }
+}
+@media (prefers-color-scheme: dark) {
+  body { background-color: var(--gold-dark-bg); color: #fef6e8; }
+  .card, .sidebar { background: linear-gradient(145deg, #3a2b00, #4c3700); box-shadow: 0 8px 25px rgba(224, 175, 71, 0.4); }
+}
