@@ -36,12 +36,20 @@ export interface SectionProps {
   children: ReactNode;
   bgColor?: string;
   noMarginTop?: boolean;
+  className?: string; 
 }
 
 export interface HomeProps {
   featuredBooks?: Book[];     
   exercises?: Exercise[];       
   themes?: Theme[];              
+}
+
+/*------------WAVESEPARATOR----------------*/
+export interface WaveSeparatorProps {
+  flip?: boolean;
+  height?: string;
+  className?: string;
 }
 
 /* ---------- THEMES / CAROUSEL ---------- */
@@ -69,7 +77,7 @@ export const themes: Theme[] = [
     image: "/public/images/4.png",
   },
   {
-    title: "Les chiffres et nombres",
+    title: "Les chiffres et les nombres",
     description:
       "Venant des systèmes indiens et arabes, les nombres développent logique, concentration et confiance en soi.",
     image: "/public/images/chiffres_0_a_9_tous_yeux_normaux.jpg",
@@ -120,6 +128,7 @@ export const themes: Theme[] = [
 
 export interface SidebarProps {
   children: React.ReactNode;
+  className?: string;
 }
 
 export interface Exercise {

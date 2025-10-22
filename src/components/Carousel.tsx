@@ -41,33 +41,33 @@ const Carousel: React.FC<CarouselProps> = ({
   };
 
   return (
-    <div className="relative w-full h-auto pb-8 overflow-hidden no-bg">
+    <div className="relative w-full h-auto pb-8 overflow-hidden">
       {/* Slides */}
       <div
         className="flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {items.map((theme, i) => (
-          <div
-            key={i}
-            className="relative flex flex-col md:flex-row items-center justify-between w-full flex-shrink-0 transition-all duration-300 glow-frame h-auto md:h-[280px] md:p-0"
-          >
-            <div className="flex items-center justify-center w-full px-1 m-2 text-center md:w-1/4 md:mb-0 no-bg">
-              <h3 className="text-2xl font-bold text-gray-800 md:text-3xl text-normal">
+      <div
+  key={i}
+  className="flex flex-col items-center justify-center flex-shrink-0 w-full h-auto transition-all duration-300 md:flex-row glow-frame md:p-0 rounded-tl-[80px] rounded-br-[80px]"
+>
+            <div className="flex items-center justify-center w-full px-3 py-5 text-center md:w-1/4 no-bg">
+              <h3 className="text-2xl font-bold text-normal md:text-3xl">
                 {theme.title}
               </h3>
             </div>
 
-            <div className="flex items-center justify-center w-full px-2 mb-3 md:w-2/4 md:mb-0 no-bg">
+            <div className="flex items-center justify-center w-full p-2 md:w-2/4 no-bg">
               <img
                 src={theme.image}
                 alt={theme.title}
-                className="object-contain max-h-[250px] w-auto"
+                className="object-contain w-auto h-full max-h-[300px]"
               />
             </div>
 
-            <div className="flex items-center justify-center w-full m-2 text-center md:w-1/4 no-bg">
-              <p className="px-2 text-base font-bold leading-relaxed text-gray-800 md:text-lg">
+            <div className="flex items-center justify-center w-full px-4 py-4 text-center md:w-1/4 no-bg">
+              <p className="text-base font-bold leading-relaxed text-gray-800 md:text-lg">
                 {theme.description}
               </p>
             </div>
@@ -75,21 +75,19 @@ const Carousel: React.FC<CarouselProps> = ({
         ))}
       </div>
 
-      {/* Boutons */}
       <button
         onClick={prevSlide}
-        className="absolute z-20 bottom-3 left-[8%] bg-[#cba95c] text-white p-3 shadow-lg hover:bg-[#ebce8c] transition md:block hidden rounded-none"
+        className="absolute z-20 bottom-2.5 left-[8%] bg-[#cba95c] text-white p-3 shadow-lg hover:bg-[#ebce8c] transition md:block hidden rounded-none"
       >
         ◀
       </button>
       <button
         onClick={nextSlide}
-        className="absolute z-20 bottom-3 right-[8%] bg-[#cba95c] text-white p-3 shadow-lg hover:bg-[#ebce8c] transition md:block hidden rounded-none"
+        className="absolute z-20 bottom-2.5 right-[8%] bg-[#cba95c] text-white p-3 shadow-lg hover:bg-[#ebce8c] transition md:block hidden rounded-none"
       >
         ▶
       </button>
 
-      {/* Points de navigation */}
       <div className="absolute z-20 flex space-x-2 -translate-x-1/2 bottom-1 left-1/2">
         {items.map((_, i) => (
           <span

@@ -8,6 +8,7 @@ import Contact from "../components/Contact";
 import ExerciseCard from "../components/ExerciseCard";
 import type { HomeProps } from "../data";
 import { exercises as defaultExercises, featuredBooks as defaultBooks, themes as defaultThemes, books } from "../data";
+import WaveSeparator from "../components/WaveSeparator";
 
 const Home: React.FC<HomeProps> = ({
   featuredBooks = defaultBooks,
@@ -15,11 +16,14 @@ const Home: React.FC<HomeProps> = ({
   themes = defaultThemes,
 }) => {
   return (
-  <main className="w-full px-4 sm:px-6">
+  <main className="w-full">
     {/* ---------- EN-TÊTE ---------- */}
-    <section id="home" className="relative pt-6 pb-12 overflow-hidden text-center">
-      <div className="relative mx-auto">
-        <div className="flex flex-col items-center justify-center gap-2 sm:flex-row">
+    <section
+      id="home"
+      className="relative flex flex-col items-center justify-center pt-12 pb-8 overflow-hidden text-center"
+    >
+      <div className="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
           <h1 className="text-3xl font-bold sm:text-5xl text-gold-gradient drop-shadow-sm">
             À mes petits écoliers
           </h1>
@@ -29,23 +33,30 @@ const Home: React.FC<HomeProps> = ({
             className="object-contain w-14 h-14 sm:w-20 sm:h-20"
           />
         </div>
-        <p className="mt-2 text-base font-bold leading-relaxed text-gray-800 sm:text-lg">
+        <p className="max-w-2xl mx-auto mt-3 text-base font-bold leading-relaxed text-gray-800 sm:text-lg">
           Des cahiers de coloriage éducatifs pour apprendre les valeurs essentielles
         </p>
       </div>
     </section>
 
     {/* ---------- CARROUSEL ---------- */}
-    <Section title="Nos thèmes" bgColor="header-rainbow" noMarginTop>
+    <WaveSeparator className="relative z-[2]" />
+    <Section
+      title="Nos thèmes"
+      bgColor="header-rainbow"
+      noMarginTop
+       className="relative z-[2] -mt-[3px] -mb-[3px]"  
+    >
       <Carousel items={themes} />
     </Section>
+    <WaveSeparator flip className="relative z-[2]" />
 
     {/* ---------- TOMES & SIDE SECTIONS ---------- */}
     <Section id="tomes" title="Nos tomes">
       <div className="flex flex-col lg:grid lg:grid-cols-[290px_1fr_290px] gap-6 w-full items-start">
 
         {/* SIDEBAR GAUCHE */}
-        <Sidebar>
+        <Sidebar className="h-full rounded-tl-3xl rounded-bl-3xl">
           <h3 className="mb-4 text-xl font-bold text-[#cba95c] text-center px-4">
             Exercices ludiques et poétiques
           </h3>
@@ -59,15 +70,22 @@ const Home: React.FC<HomeProps> = ({
           </p>
         </Sidebar>
 
-        {/* LIVRES AU CENTRE */}
-        <div className="grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 place-items-center">
+       {/* GRID MOBILE / TABLETTE */}
+        <div className="grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 lg:hidden place-items-center">
           {featuredBooks.map((book, i) => (
+            <BookCard key={i} book={book} />
+          ))}
+        </div>
+        
+        {/* LIVRES AU CENTRE - version desktop */}
+        <div className="hidden w-full gap-6 lg:grid sm:grid-cols-2 md:grid-cols-3 place-items-center">
+          {featuredBooks.slice(0, 6).map((book, i) => (
             <BookCard key={i} book={book} />
           ))}
         </div>
 
         {/* SIDEBAR DROITE */}
-        <Sidebar>
+       <Sidebar className="h-full rounded-br-3xl rounded-tr-3xl">
           <h3 className="mb-4 text-xl font-bold text-[#e7c987] text-center px-4">
             Poèmes & Conseils éducatifs
           </h3>
@@ -129,14 +147,45 @@ const Home: React.FC<HomeProps> = ({
             </p>
           </div>
         </Sidebar>
-      </div>
+        </div>
+        
+        {/* DERNIÈRE LIGNE DES 4 TOMES - desktop only */}
+        <div className="relative items-center justify-center hidden w-full mt-6 lg:flex">
+          
+          {/* Angle gauche */}
+          <div className="relative flex flex-col items-start justify-start w-20 h-72">
+            <div className="absolute top-0 left-0 w-2 h-full rounded-l-lg header-rainbow"></div>
+            <div className="absolute bottom-0 left-0 w-full h-2 rounded-bl-lg header-rainbow"></div>
+          </div>
+
+          {/* Grille des 4 tomes */}
+          <div className="grid w-full max-w-[1180px] grid-cols-4 gap-6 place-items-center px-4">
+            {featuredBooks.slice(6, 10).map((book, i) => (
+              <BookCard key={i} book={book} />
+            ))}
+          </div>
+
+          {/* Angle droit */}
+          <div className="relative flex flex-col items-end justify-end w-20 h-72">
+            <div className="absolute bottom-0 right-0 w-2 h-full rounded-r-lg header-rainbow"></div>
+            <div className="absolute bottom-0 right-0 w-full h-2 rounded-br-lg header-rainbow"></div>
+          </div>
+        </div>
     </Section>
 
-      {/* ---------- ABOUT & CONTACT ---------- */}
-    <Section id="about" title="À propos" bgColor="header-rainbow">
-      <About books={books} />
+   {/* ---------- ABOUT & CONTACT ---------- */}
+    <WaveSeparator className="relative z-[1] mt-12" />
+    <Section
+        id="about"
+        title="À propos"
+        bgColor="header-rainbow"
+        noMarginTop
+        className="relative z-[2] -mt-[3px] -mb-[3px]"  
+      >
+        <About books={books} />
     </Section>
-      
+    <WaveSeparator flip className="relative z-[1]" />
+
     <Section id="contact" title="Avis & Contact">
       <Contact />
     </Section>

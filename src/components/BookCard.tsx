@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import type { Book } from "../data";
+import type { BooksProps } from "../data";
 import { bookDescriptions } from "../data";
 import CTAButton from "./CTAButton";
-
-interface BooksProps {
-  book: Book;
-}
 
 const BookCard: React.FC<BooksProps> = ({ book }) => {
   const [showModal, setShowModal] = useState(false);
@@ -22,12 +18,11 @@ const BookCard: React.FC<BooksProps> = ({ book }) => {
         <h3 className="text-center text-lg font-semibold text-[#cba95c] line-clamp-2 mt-2 px-1">
           {book.title}
         </h3>
-
         <CTAButton
           onClick={() => setShowModal(true)}
           variant="button-gold"
           aria-label={`Voir les détails de ${book.title}`}
-          className="mt-2"
+          className="m-2"
         >
           Voir les détails
         </CTAButton>

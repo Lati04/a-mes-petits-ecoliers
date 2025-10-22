@@ -9,17 +9,17 @@ const About: React.FC<AboutProps> = ({
   amazonLink = "https://www.amazon.fr/s?k=à+mes+petits+écoliers",
 }) => {
   return (
-    <div className="w-full p-6 mx-auto mb-4 space-y-2 leading-relaxed text-center text-gray-800 glow-frame">
+    <div className="w-full p-6 mx-auto mb-4 space-y-2 leading-relaxed text-center text-gray-800 bg-white/90 glow-frame rounded-tl-[60px] rounded-br-[80px]">
 
       <p className="text-[1rem] no-bg">
-        Je m'appelle <strong className="no-bg">Latifa</strong>. Après plus de vingt ans dans le métier d'infirmière, 
-        j’ai choisi de me reconvertir dans le <strong className="no-bg">développement web et mobile</strong>. 
+        Je m'appelle <strong>Latifa</strong>. Après plus de vingt ans dans le métier d'infirmière, 
+        j’ai choisi de me reconvertir dans le <strong>développement web et mobile</strong>. 
         Cela m’a ouvert un monde de nouvelles compétences, d’outils numériques et de possibilités créatives.
       </p>
 
       <p className="text-[1rem] no-bg">
         J’ai allié rigueur, écoute et sens du détail à ma passion pour l’éducation et la création. 
-        C’est cette combinaison qui m’a inspirée pour créer la collection <em className="no-bg">“À mes petits écoliers”</em>, 
+        C’est cette combinaison qui m’a inspirée pour créer la collection <em>“À mes petits écoliers”</em>, 
         un projet de cœur qui accompagne les enfants dans le développement de leur <strong>confiance en soi</strong>, 
         leur <strong>amour de soi</strong> et leur <strong>créativité</strong>. 
         Chaque cahier aide les enfants à devenir des adultes empathiques, bienveillants, respectueux et capables de semer du positif autour d’eux.
@@ -57,12 +57,12 @@ const About: React.FC<AboutProps> = ({
           ))}
         </div>
 
-        <p className="mt-4 text-[1rem] no-bg">
+        <p className="mt-4 text-[1rem]">
           <strong className="no-bg">Apprendre en s’amusant, c’est possible !</strong><br />
           La collection <em className="no-bg">À mes petits écoliers</em> propose des cahiers éducatifs et créatifs pour les enfants dès trois ans. 
           Chaque tome offre une expérience complète : développer la <strong>motricité fine</strong>, la <strong>concentration</strong>, la <strong>curiosité</strong>, la <strong>créativité</strong> et le <strong>goût du beau</strong>, 
           éveiller l’intérêt pour les lettres, les nombres et les couleurs, et favoriser la <strong>confiance en soi</strong> ainsi que l’apprentissage de <strong>valeurs humaines</strong> comme l’<strong>empathie</strong>, la <strong>bienveillance</strong>, le <strong>respect</strong> et l’<strong>organisation</strong>. 
-          Chaque cahier peut être utilisé indépendamment, mais ensemble, ils forment une collection progressive adaptée à l’évolution de l’enfant — de la maternelle jusqu’au début de l’adolescence.
+          Chaque cahier peut être utilisé indépendamment, mais ensemble, ils forment une collection progressive adaptée à l’évolution de l’enfant <br></br> — de la maternelle jusqu’au début de l’adolescence.
         </p>
 
         <p className="mt-2 font-medium text-center text-[#cba95c] text-[1rem]">

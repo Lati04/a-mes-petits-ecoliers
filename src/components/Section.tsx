@@ -7,13 +7,14 @@ const Section: React.FC<SectionProps> = ({
   children,
   bgColor = "",
   noMarginTop = false,
+  className = "",
 }) => (
   <section
     id={id}
     aria-labelledby={id ? `${id}-title` : undefined}
-    className={`relative w-full max-w-[1450px] mx-auto py-4 px-3 md:px-6 lg:px-12 glow-frame ${bgColor} ${
+    className={`border-none relative w-full mx-auto py-4 px-3 md:px-6 lg:px-12 ${bgColor} ${
       noMarginTop ? "mt-0" : "mt-12"
-    }`}
+    } ${className}`}
   >
     {title && (
       <h2
