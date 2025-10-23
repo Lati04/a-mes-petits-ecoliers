@@ -68,61 +68,61 @@ export const themes: Theme[] = [
     title: "L’alphabet",
     description:
       "L’alphabet vient des lettres phéniciennes, grecques et latines. Chaque lettre a une forme unique. Apprendre à les écrire développe lecture, mémoire et créativité.",
-    image: "/public/images/alphabet_majuscules_minuscules_kawaii_v2.jpg",
+    image: "/images/alphabet_majuscules_minuscules_kawaii_v2.jpg",
   },
   {
     title: "Les couleurs",
     description:
       "Les couleurs influencent nos émotions et nos perceptions. Colorier permet d’exprimer ses sentiments et d’observer le monde avec attention.",
-    image: "/public/images/4.png",
+    image: "/images/4.png",
   },
   {
     title: "Les chiffres et les nombres",
     description:
       "Venant des systèmes indiens et arabes, les nombres développent logique, concentration et confiance en soi.",
-    image: "/public/images/chiffres_0_a_9_tous_yeux_normaux.jpg",
+    image: "/images/chiffres_0_a_9_tous_yeux_normaux.jpg",
   },
   {
     title: "Le manga",
     description:
       "Forme de BD japonaise du XIXe siècle. Dessiner ou colorier stimule imagination et capacité à raconter des histoires.",
-    image: "/public/images/monde_manga.jpg",
+    image: "/images/monde_manga.jpg",
   },
   {
     title: "Le mandala",
     description:
       "Mot sanskrit signifiant 'cercle sacré', utilisé pour l’harmonie et l’équilibre. Colorier un mandala favorise patience et concentration.",
-    image: "/public/images/3.png",
+    image: "/images/3.png",
   },
   {
     title: "Le kawaii",
     description:
       "Apparu au Japon dans les années 1970, il rend le monde plus doux. Colorier du kawaii développe créativité et joie de vivre.",
-    image: "/public/images/univers_kawaii.jpg",
+    image: "/images/univers_kawaii.jpg",
   },
   {
     title: "L’empathie",
     description:
       "Capacité à comprendre et partager les émotions des autres. Observer et colorier des scènes émotionnelles développe cette qualité.",
-    image: "/public/images/empathie_enfants_kawaii.jpg",
+    image: "/images/empathie_enfants_kawaii.jpg",
   },
   {
     title: "La bienveillance",
     description:
       "Agir avec douceur et respect envers soi et les autres. Colorier des scènes positives renforce attention et générosité.",
-    image: "/public/images/bienveillance_enfants_kawaii.jpg",
+    image: "/images/bienveillance_enfants_kawaii.jpg",
   },
   {
     title: "Le respect et le courage",
     description:
        "Le respect consiste à reconnaître la valeur des autres et le courage à affronter les difficultés. Ces valeurs aident à dire non au harcèlement.",
-    image: "/public/images/harcelement_defense_enfants_kawaii.jpg",
+    image: "/images/harcelement_defense_enfants_kawaii.jpg",
   },
   {
     title: "S’organiser",
     description:
       "Planifier ses journées apporte équilibre, bien-être et confiance. Laisser place à l’imprévu renforce sérénité et créativité.",
-    image: "/public/images/organisation_enfant_kawaii.jpg",
+    image: "/images/organisation_enfant_kawaii.jpg",
   },
 ];
 
@@ -697,7 +697,8 @@ export interface AboutProps {
 }
 
 /*---------------CONTACT----------------------*/
-export const API_URL = "http://localhost:3000";
+// export const API_URL = "http://localhost:3000";
+export const API_URL = "https://a-mes-petits-ecoliers.onrender.com";
 
 export interface Comment {
   name: string;
