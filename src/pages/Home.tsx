@@ -17,25 +17,27 @@ const Home: React.FC<HomeProps> = ({
 }) => {
   return (
   <main className="w-full">
-    {/* ---------- EN-TÊTE ---------- */}
     <section
       id="home"
-      className="relative flex flex-col items-center justify-center pt-12 pb-8 overflow-hidden text-center"
+      className="flex flex-col items-center justify-center gap-4 px-4 mx-auto md:flex-row sm:px-6 lg:px-8 max-w-7xl"
     >
-      <div className="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <h1 className="text-3xl font-bold sm:text-5xl text-gold-gradient drop-shadow-sm">
-            À mes petits écoliers
-          </h1>
-          <img
-            src="/images/lg_title.png"
-            alt="Décoration"
-            className="object-contain w-14 h-14 sm:w-20 sm:h-20"
-          />
-        </div>
-        <p className="max-w-2xl mx-auto mt-3 text-base font-bold leading-relaxed text-gray-800 sm:text-lg">
+      <div className="flex flex-col items-center mt-12 md:items-start md:mr-4 md:mt-16">
+        <h1 className="text-4xl font-bold text-center sm:text-5xl text-gold-gradient md:text-left">
+          À mes petits écoliers
+        </h1>
+        <p className="max-w-2xl mx-auto mt-3 text-base font-bold leading-relaxed text-center text-gray-800 sm:text-lg md:text-left">
           Des cahiers de coloriage éducatifs pour apprendre les valeurs essentielles
         </p>
+      </div>
+
+      <div className="flex-shrink-0 w-36 sm:w-40 md:w-80 rounded-3xl shadow-[0_4px_18px_rgba(203,169,92,0.25)] hover:shadow-[0_6px_25px_rgba(203,169,92,0.35)] transition-shadow duration-300 transform relative md:translate-y-16"
+      style={{ rotate: "8deg" }}
+      >
+        <img
+          src="/images/contact2bis.jpg"
+          alt="Décoration"
+          className="object-contain w-full h-auto"
+        />
       </div>
     </section>
 
@@ -45,14 +47,14 @@ const Home: React.FC<HomeProps> = ({
       title="Nos thèmes"
       bgColor="header-rainbow"
       noMarginTop
-       className="relative z-[2] -mt-[3px] -mb-[3px]"  
+       className="relative z-[2] -mt-[6px] -mb-[3px]"  
     >
       <Carousel items={themes} />
     </Section>
     <WaveSeparator flip className="relative z-[2]" />
 
     {/* ---------- TOMES & SIDE SECTIONS ---------- */}
-    <Section id="tomes" title="Nos tomes">
+    <Section id="tomes" title="Nos tomes" noMarginTop>
       <div className="flex flex-col lg:grid lg:grid-cols-[290px_1fr_290px] gap-6 w-full items-start">
 
         {/* SIDEBAR GAUCHE */}
@@ -186,7 +188,25 @@ const Home: React.FC<HomeProps> = ({
     </Section>
     <WaveSeparator flip className="relative z-[1]" />
 
-    <Section id="contact" title="Avis & Contact">
+    {/* Image Desktop */}
+    <section className="justify-center hidden mx-auto mt-2 max-w-7xl md:flex">
+      <img 
+        src="/images/contact1.jpg" 
+        alt="Contact Desktop" 
+        className="object-contain w-full"
+      />
+    </section>
+
+    {/* Image Mobile/Tablette */}
+    <section className="flex justify-center px-4 mx-auto mt-2 md:hidden">
+      <img 
+        src="/images/contact2.jpg" 
+        alt="Contact Mobile" 
+        className="object-cover w-full"
+      />
+    </section>
+
+    <Section id="contact" title="Avis & Contact" noMarginTop>
       <Contact />
     </Section>
   </main>

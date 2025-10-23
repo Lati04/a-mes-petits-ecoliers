@@ -12,7 +12,7 @@ const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="w-full bg-[#ebce8c] backdrop-blur-md shadow-[0_-4px_12px_rgba(203,169,92,0.25)] dark:bg-[#3d2e00]/90 dark:shadow-[0_-6px_15px_rgba(203,169,92,0.4)] transition-all duration-300 mt-12 py-4 text-center text-gray-700 dark:text-[#fff8e1]">
+    <footer className="w-full bg-[#ebce8c] backdrop-blur-md shadow-[0_-4px_12px_rgba(203,169,92,0.25)] dark:bg-[#3d2e00]/90 dark:shadow-[0_-6px_15px_rgba(203,169,92,0.4)] transition-all duration-300 py-4 text-center text-gray-700 dark:text-[#fff8e1]">
       {showBackToTop && (
         <div
           onClick={scrollToTop}
