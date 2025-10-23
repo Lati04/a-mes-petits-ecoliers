@@ -140,8 +140,8 @@ h1 { font-size: 3.2em; line-height: 1.1; }
   body { background-color: var(--gold-bg); color: var(--gray-dark); }
   .card, .sidebar { background: linear-gradient(145deg, #fffefb, #fef6e8); }
 }
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   body { background-color: var(--gold-dark-bg); color: #fef6e8; }
   .card, .sidebar { background: linear-gradient(145deg, #3a2b00, #4c3700); box-shadow: 0 8px 25px rgba(224, 175, 71, 0.4); }
-}
+} */
 
