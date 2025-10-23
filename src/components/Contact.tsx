@@ -82,7 +82,7 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
 
   return (
     <div className="w-full mx-auto px-4 py-12 mb-7 mt-4 bg-white/60 backdrop-blur-md shadow-[0_4px_18px_rgba(203,169,92,0.25)] hover:shadow-[0_6px_25px_rgba(203,169,92,0.35)] transition-shadow duration-300 text-gray-800
-      max-w-7xl rounded-tl-[60px] rounded-br-[80px]">
+      max-w-7xl rounded-bl-[60px] rounded-br-[60px]">
       {/* ---------- Commentaires ---------- */}
       <p className="mb-2 font-bold text-center text-gray-700">
         Un avis, un commentaire, un mot doux, une idée à partager, cest par ici !  

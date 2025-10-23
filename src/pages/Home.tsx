@@ -189,7 +189,9 @@ const Home: React.FC<HomeProps> = ({
     <WaveSeparator flip className="relative z-[1]" />
 
     {/* Image Desktop */}
-    <section className="justify-center hidden mx-auto mt-2 max-w-7xl md:flex">
+    <section className="justify-center hidden mx-auto mt-2 max-w-7xl md:flex shadow-[0_4px_18px_rgba(203,169,92,0.25)] 
+          hover:shadow-[0_6px_25px_rgba(203,169,92,0.35)] transition-shadow duration-300
+          rounded-tl-[60px] rounded-tr-[60px]">
       <img 
         src="/images/contact1.jpg" 
         alt="Contact Desktop" 
@@ -198,13 +200,19 @@ const Home: React.FC<HomeProps> = ({
     </section>
 
     {/* Image Mobile/Tablette */}
-    <section className="flex justify-center px-4 mx-auto mt-2 md:hidden">
-      <img 
-        src="/images/contact2.jpg" 
-        alt="Contact Mobile" 
-        className="object-cover w-full"
-      />
-    </section>
+    <div className="w-full px-4 mx-auto mt-2 max-w-7xl md:hidden">
+      {/* Section avec shadow et arrondi */}
+      <section className="flex justify-center shadow-[0_4px_18px_rgba(203,169,92,0.25)] 
+          hover:shadow-[0_6px_25px_rgba(203,169,92,0.35)] transition-shadow duration-300
+          rounded-tl-[60px] rounded-tr-[60px] overflow-hidden">
+        <img 
+          src="/images/contact2.jpg" 
+          alt="Contact Mobile" 
+          className="object-cover w-full"
+        />
+      </section>
+    </div>
+
 
     <Section id="contact" title="Avis & Contact" noMarginTop>
       <Contact />
