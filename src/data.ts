@@ -698,7 +698,7 @@ export interface AboutProps {
 
 /*---------------CONTACT----------------------*/
 // export const API_URL = "http://localhost:3000";
-export const API_URL = "https://a-mes-petits-ecoliers.onrender.com";
+export const API_URL = "https://api-a-mes-petits-ecoliers.onrender.com/";
 
 export interface Comment {
   name: string;

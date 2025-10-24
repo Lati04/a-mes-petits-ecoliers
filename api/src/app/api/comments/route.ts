@@ -20,7 +20,7 @@ export async function OPTIONS() {
 }
 
 // Mémoire pour les commentaires
-let comments: { name: string; message: string }[] = [];
+const comments: { name: string; message: string }[] = [];
 
 // GET pour récupérer les commentaires
 export async function GET() {
