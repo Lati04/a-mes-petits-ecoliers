@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { PrismaClient } from "@prisma/client";
 
 export const runtime = "nodejs";
+const prisma = new PrismaClient();
 
-// Anti-spam basique
+// Anti-spam basique (en mémoire)
 const lastSubmissions = new Map<string, number>();
 const RATE_LIMIT_MS = 30_000;
 
-// Helper pour CORS dynamique
+// Helper CORS
 function getCorsHeaders(req: NextRequest) {
   const origin = req.headers.get("origin") || "";
   const allowedOrigins = [
@@ -21,26 +22,24 @@ function getCorsHeaders(req: NextRequest) {
   };
 }
 
-// OPTIONS handler
+// OPTIONS preflight
 export async function OPTIONS(req: NextRequest) {
   return new NextResponse(null, { status: 204, headers: getCorsHeaders(req) });
 }
 
-// POST handler
+// GET all contacts (optionnel)
+export async function GET(req: NextRequest) {
+  const contacts = await prisma.contact.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+  return NextResponse.json({ contacts }, { headers: getCorsHeaders(req) });
+}
+
+// POST new contact
 export async function POST(req: NextRequest) {
   try {
-    let body: { email?: string };
-    try {
-      body = await req.json();
-    } catch (err) {
-      console.error("JSON invalide :", err);
-      return NextResponse.json(
-        { error: "JSON invalide" },
-        { status: 400, headers: getCorsHeaders(req) }
-      );
-    }
+    const { email } = await req.json();
 
-    const { email } = body;
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       return NextResponse.json(
         { error: "Adresse e-mail invalide." },
@@ -59,42 +58,36 @@ export async function POST(req: NextRequest) {
     }
     lastSubmissions.set(email, now);
 
-    console.log("POST /api/contact reçu pour :", email, "depuis:", req.headers.get("origin"));
+    // === Stockage dans PostgreSQL via Prisma ===
+    await prisma.contact.create({ data: { email } });
 
-    // Transporteur SMTP
-    const transporter = nodemailer.createTransport({
-      host: "smtp-relay.sendinblue.com",
-      port: 587,
-      auth: {
-        user: process.env.BREVO_EMAIL,
-        pass: process.env.BREVO_API_KEY,
-      },
-      connectionTimeout: 10_000,
+    // === Envoi via Brevo API ===
+    const sendinblueApiKey = process.env.BREVO_API_KEY!;
+    const siteEmail = process.env.BREVO_EMAIL!;
+
+    // Mail vers site
+    await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "api-key": sendinblueApiKey },
+      body: JSON.stringify({
+        sender: { name: "Site Coloriages", email: siteEmail },
+        to: [{ email: siteEmail }],
+        subject: "📬 Nouveau contact depuis le site",
+        textContent: `Un visiteur a laissé son e-mail : ${email}`,
+      }),
     });
 
-    try {
-      // Mail vers le site
-      await transporter.sendMail({
-        from: `"Site Coloriages" <${process.env.BREVO_EMAIL}>`,
-        to: process.env.BREVO_EMAIL,
-        subject: "📬 Nouveau contact depuis le site",
-        text: `Un visiteur a laissé son e-mail : ${email}`,
-      });
-
-      // Accusé de réception utilisateur
-      await transporter.sendMail({
-        from: `"Latifa - À mes petits écoliers" <${process.env.BREVO_EMAIL}>`,
-        to: email,
+    // Accusé de réception utilisateur
+    await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "api-key": sendinblueApiKey },
+      body: JSON.stringify({
+        sender: { name: "Latifa - À mes petits écoliers", email: siteEmail },
+        to: [{ email }],
         subject: "Merci pour ton message 🌷",
-        text: `Bonjour 🌸\n\nMerci d’avoir pris contact ! Je te répondrai dès que possible.\n\nLatifa`,
-      });
-    } catch (smtpErr) {
-      console.error("Erreur SMTP :", smtpErr);
-      return NextResponse.json(
-        { error: "Impossible d’envoyer l’e-mail. Veuillez réessayer plus tard." },
-        { status: 500, headers: getCorsHeaders(req) }
-      );
-    }
+        textContent: `Bonjour 🌸\n\nMerci d’avoir pris contact ! Je te répondrai dès que possible.\n\nLatifa`,
+      }),
+    });
 
     return NextResponse.json({ success: true }, { headers: getCorsHeaders(req) });
   } catch (err) {

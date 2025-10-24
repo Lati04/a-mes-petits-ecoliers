@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
 
 export const runtime = "nodejs";
+const prisma = new PrismaClient();
 
-// Mémoire pour les commentaires
-const comments: { name: string; message: string }[] = [];
-
-// Helper pour CORS dynamique
+// Helper CORS
 function getCorsHeaders(req: NextRequest) {
   const origin = req.headers.get("origin") || "";
   const allowedOrigins = [
@@ -19,17 +18,20 @@ function getCorsHeaders(req: NextRequest) {
   };
 }
 
-// OPTIONS handler (preflight)
+// OPTIONS preflight
 export async function OPTIONS(req: NextRequest) {
   return new NextResponse(null, { status: 204, headers: getCorsHeaders(req) });
 }
 
-// GET handler
+// GET all comments
 export async function GET(req: NextRequest) {
+  const comments = await prisma.comment.findMany({
+    orderBy: { createdAt: "desc" },
+  });
   return NextResponse.json({ comments }, { headers: getCorsHeaders(req) });
 }
 
-// POST handler
+// POST new comment
 export async function POST(req: NextRequest) {
   try {
     const { name, message } = await req.json();
@@ -41,13 +43,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const sanitizedName = name?.trim() || "Anonyme";
-    const sanitizedMessage = message.trim();
-
-    comments.push({ name: sanitizedName, message: sanitizedMessage });
+    const comment = await prisma.comment.create({
+      data: {
+        name: name?.trim() || "Anonyme",
+        message: message.trim(),
+      },
+    });
 
     return NextResponse.json(
-      { success: true, comments },
+      { success: true, comments: [comment] },
       { headers: getCorsHeaders(req) }
     );
   } catch (err) {
