@@ -2,32 +2,34 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
-const FRONTEND_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://a-mes-petits-ecoliers.onrender.com"
-    : "http://localhost:5173";
-
-// CORS
-const corsHeaders = {
-  "Access-Control-Allow-Origin": FRONTEND_URL,
-  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
-
-// OPTIONS pour pré-vol
-export async function OPTIONS() {
-  return NextResponse.json({}, { headers: corsHeaders });
-}
-
 // Mémoire pour les commentaires
 const comments: { name: string; message: string }[] = [];
 
-// GET pour récupérer les commentaires
-export async function GET() {
-  return NextResponse.json({ comments }, { headers: corsHeaders });
+// Helper pour CORS dynamique
+function getCorsHeaders(req: NextRequest) {
+  const origin = req.headers.get("origin") || "";
+  const allowedOrigins = [
+    "https://a-mes-petits-ecoliers.onrender.com",
+    "http://localhost:5173",
+  ];
+  return {
+    "Access-Control-Allow-Origin": allowedOrigins.includes(origin) ? origin : "",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
 }
 
-// POST pour envoyer un commentaire
+// OPTIONS handler (preflight)
+export async function OPTIONS(req: NextRequest) {
+  return new NextResponse(null, { status: 204, headers: getCorsHeaders(req) });
+}
+
+// GET handler
+export async function GET(req: NextRequest) {
+  return NextResponse.json({ comments }, { headers: getCorsHeaders(req) });
+}
+
+// POST handler
 export async function POST(req: NextRequest) {
   try {
     const { name, message } = await req.json();
@@ -35,7 +37,7 @@ export async function POST(req: NextRequest) {
     if (!message || message.trim().length === 0) {
       return NextResponse.json(
         { error: "Message vide" },
-        { status: 400, headers: corsHeaders }
+        { status: 400, headers: getCorsHeaders(req) }
       );
     }
 
@@ -44,12 +46,15 @@ export async function POST(req: NextRequest) {
 
     comments.push({ name: sanitizedName, message: sanitizedMessage });
 
-    return NextResponse.json({ success: true, comments }, { headers: corsHeaders });
+    return NextResponse.json(
+      { success: true, comments },
+      { headers: getCorsHeaders(req) }
+    );
   } catch (err) {
     console.error("Erreur /api/comments :", err);
     return NextResponse.json(
       { error: "Erreur serveur" },
-      { status: 500, headers: corsHeaders }
+      { status: 500, headers: getCorsHeaders(req) }
     );
   }
 }

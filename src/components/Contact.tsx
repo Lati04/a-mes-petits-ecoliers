@@ -132,7 +132,7 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
       {/* ---------- Formulaire Contact Privé ---------- */}
       <div className="mx-auto mt-4">
         <p className="mb-2 font-bold text-center text-gray-700">
-          Pour toute prise de contact, indique ton email.
+          Pour toute prise de contact, c'est par ici !
         </p>
 
         {privateError && (

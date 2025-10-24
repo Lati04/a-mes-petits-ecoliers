@@ -3,31 +3,32 @@ import nodemailer from "nodemailer";
 
 export const runtime = "nodejs";
 
-// URL frontend selon environnement
-const FRONTEND_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://a-mes-petits-ecoliers.onrender.com"
-    : "http://localhost:5173";
-
-// CORS headers
-const corsHeaders = {
-  "Access-Control-Allow-Origin": FRONTEND_URL,
-  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
-
-// OPTIONS pour preflight
-export async function OPTIONS() {
-  return new NextResponse(null, { status: 204, headers: corsHeaders });
-}
-
 // Anti-spam basique
 const lastSubmissions = new Map<string, number>();
 const RATE_LIMIT_MS = 30_000;
 
+// Helper pour CORS dynamique
+function getCorsHeaders(req: NextRequest) {
+  const origin = req.headers.get("origin") || "";
+  const allowedOrigins = [
+    "https://a-mes-petits-ecoliers.onrender.com",
+    "http://localhost:5173",
+  ];
+  return {
+    "Access-Control-Allow-Origin": allowedOrigins.includes(origin) ? origin : "",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+}
+
+// OPTIONS handler
+export async function OPTIONS(req: NextRequest) {
+  return new NextResponse(null, { status: 204, headers: getCorsHeaders(req) });
+}
+
+// POST handler
 export async function POST(req: NextRequest) {
   try {
-    // JSON parse sécurisé
     let body: { email?: string };
     try {
       body = await req.json();
@@ -35,7 +36,7 @@ export async function POST(req: NextRequest) {
       console.error("JSON invalide :", err);
       return NextResponse.json(
         { error: "JSON invalide" },
-        { status: 400, headers: corsHeaders }
+        { status: 400, headers: getCorsHeaders(req) }
       );
     }
 
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest) {
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       return NextResponse.json(
         { error: "Adresse e-mail invalide." },
-        { status: 400, headers: corsHeaders }
+        { status: 400, headers: getCorsHeaders(req) }
       );
     }
 
@@ -53,14 +54,14 @@ export async function POST(req: NextRequest) {
     if (lastTime && now - lastTime < RATE_LIMIT_MS) {
       return NextResponse.json(
         { error: "Trop de tentatives rapprochées." },
-        { status: 429, headers: corsHeaders }
+        { status: 429, headers: getCorsHeaders(req) }
       );
     }
     lastSubmissions.set(email, now);
 
     console.log("POST /api/contact reçu pour :", email, "depuis:", req.headers.get("origin"));
 
-    // Transporteur SMTP avec timeout
+    // Transporteur SMTP
     const transporter = nodemailer.createTransport({
       host: "smtp-relay.sendinblue.com",
       port: 587,
@@ -71,9 +72,9 @@ export async function POST(req: NextRequest) {
       connectionTimeout: 10_000,
     });
 
-    // Envoi du mail au site
     try {
-     await transporter.sendMail({
+      // Mail vers le site
+      await transporter.sendMail({
         from: `"Site Coloriages" <${process.env.BREVO_EMAIL}>`,
         to: process.env.BREVO_EMAIL,
         subject: "📬 Nouveau contact depuis le site",
@@ -91,16 +92,16 @@ export async function POST(req: NextRequest) {
       console.error("Erreur SMTP :", smtpErr);
       return NextResponse.json(
         { error: "Impossible d’envoyer l’e-mail. Veuillez réessayer plus tard." },
-        { status: 500, headers: corsHeaders }
+        { status: 500, headers: getCorsHeaders(req) }
       );
     }
 
-    return NextResponse.json({ success: true }, { headers: corsHeaders });
+    return NextResponse.json({ success: true }, { headers: getCorsHeaders(req) });
   } catch (err) {
     console.error("Erreur /api/contact :", err);
     return NextResponse.json(
       { error: err instanceof Error ? err.message : "Erreur serveur" },
-      { status: 500, headers: corsHeaders }
+      { status: 500, headers: getCorsHeaders(req) }
     );
   }
 }
