@@ -75,10 +75,11 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true }, { headers: corsHeaders });
   } catch (err) {
-    console.error("Erreur /api/contact :", err);
-    return NextResponse.json(
-      { error: "Erreur lors de l’envoi de l’e-mail." },
-      { status: 500, headers: corsHeaders }
-    );
-  }
+  console.error("Erreur /api/contact :", err);
+  return NextResponse.json(
+    { error: err instanceof Error ? err.message : "Erreur lors de l’envoi de l’e-mail." },
+    { status: 500, headers: corsHeaders }
+  );
+}
+
 }

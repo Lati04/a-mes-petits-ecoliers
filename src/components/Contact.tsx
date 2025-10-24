@@ -4,12 +4,14 @@ import type { Comment, CommentForm, PrivateForm, ContactProps } from "../data";
 import CTAButton from "./CTAButton";
 
 const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
-  // ---------- Commentaire ----------
+  // ---------- Commentaires ----------
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentForm, setCommentForm] = useState<CommentForm>({ name: "", message: "" });
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Commentaire submit déclenché");
+
     if (!commentForm.message.trim()) return;
 
     try {
@@ -18,6 +20,7 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(commentForm),
       });
+
       if (res.ok) {
         const data = await res.json();
         setComments(data.comments);
@@ -45,6 +48,8 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
 
   const handlePrivateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Contact privé submit déclenché");
+
     setPrivateError("");
     setPrivateSent(false);
 
@@ -81,11 +86,11 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
   };
 
   return (
-    <div className="w-full mx-auto px-4 py-12 mb-7 mt-4 bg-white/60 backdrop-blur-md shadow-[0_4px_18px_rgba(203,169,92,0.25)] hover:shadow-[0_6px_25px_rgba(203,169,92,0.25)] transition-shadow duration-300 text-gray-800
-      max-w-7xl rounded-bl-[60px] rounded-br-[60px]">
-      {/* ---------- Commentaires ---------- */}
+    <div className="w-full mx-auto px-4 py-12 mb-7 mt-4 bg-white/60 backdrop-blur-md shadow-[0_4px_18px_rgba(203,169,92,0.25)] hover:shadow-[0_6px_25px_rgba(203,169,92,0.25)] transition-shadow duration-300 text-gray-800 max-w-7xl rounded-bl-[60px] rounded-br-[60px]">
+
+      {/* ---------- Formulaire Commentaires ---------- */}
       <p className="mb-2 font-bold text-center text-gray-700">
-        Un avis, un commentaire, un mot doux, une idée à partager, cest par ici !  
+        Un avis, un commentaire, un mot doux, une idée à partager, c'est par ici !
       </p>
 
       <form onSubmit={handleCommentSubmit} className="flex flex-col max-w-2xl gap-4 mx-auto mb-6">
@@ -98,6 +103,7 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
             className="w-full p-4 font-bold rounded-none focus:outline-none no-bg placeholder:text-[#cba95c] placeholder:font-semibold"
           />
         </div>
+
         <div className="mt-2 bg-transparent rounded-none backdrop-blur-sm glow-frame">
           <textarea
             placeholder="Ton commentaire"
@@ -108,14 +114,9 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
             className="w-full p-4 font-bold rounded-none no-bg focus:outline-none placeholder:text-[#cba95c] placeholder:font-semibold"
           />
         </div>
-        <CTAButton
-          type="submit"
-          onClick={() => {}}
-          variant="button-gold"
-          aria-label="Envoyer le commentaire"
-          className="mx-auto"
-        >
-          {isSending ? "Envoi..." : "Envoyer"}
+
+        <CTAButton type="submit" variant="button-gold" aria-label="Envoyer le commentaire" className="mx-auto">
+          Envoyer
         </CTAButton>
       </form>
 
@@ -128,9 +129,9 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
         ))}
       </div>
 
-      {/* ---------- Contact privé ---------- */}
-      <div className="mx-auto">
-        <p className="mb-2 font-bold text-center text-gray-700 ">
+      {/* ---------- Formulaire Contact Privé ---------- */}
+      <div className="mx-auto mt-4">
+        <p className="mb-2 font-bold text-center text-gray-700">
           Pour toute prise de contact, indique ton email.
         </p>
 
@@ -146,10 +147,7 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
         )}
 
         {!privateSent && (
-          <form
-            onSubmit={handlePrivateSubmit}
-            className="flex items-center justify-center max-w-2xl gap-4 mx-auto"
-          >
+          <form onSubmit={handlePrivateSubmit} className="flex items-center justify-center max-w-2xl gap-4 mx-auto">
             <div className="flex-1 bg-transparent rounded-none glow-frame backdrop-blur-sm">
               <input
                 type="email"
@@ -161,13 +159,8 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
                 disabled={isSending}
               />
             </div>
-            <CTAButton
-              type="submit"
-              onClick={() => {}}
-              variant="button-gold"
-              aria-label={isSending ? "Envoi en cours" : "Envoyer l'email"}
-              className=""
-            >
+
+            <CTAButton type="submit" variant="button-gold" aria-label={isSending ? "Envoi en cours" : "Envoyer l'email"}>
               {isSending ? "Envoi..." : "Envoyer"}
             </CTAButton>
           </form>
