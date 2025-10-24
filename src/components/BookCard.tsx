@@ -13,7 +13,7 @@ const BookCard: React.FC<BooksProps> = ({ book }) => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-between py-2 overflow-hidden transition-transform duration-300 bg-white shadow-md hover:shadow-lg hover:-translate-y-1">
+      <div className="flex flex-col items-center justify-between py-2 overflow-hidden transition-transform duration-300 bg-white shadow-[0_6px_15px_rgba(224,175,71,0.35)] hover:shadow-[0_6px_25px_rgba(203,169,92,0.25)] hover:-translate-y-1">
         <img src={book.img} alt={book.title} className="object-cover w-full h-45" />
         <h3 className="text-center text-lg font-semibold text-[#cba95c] line-clamp-2 mt-2 px-1">
           {book.title}

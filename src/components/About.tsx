@@ -9,7 +9,7 @@ const About: React.FC<AboutProps> = ({
   amazonLink = "https://www.amazon.fr/s?k=à+mes+petits+écoliers",
 }) => {
   return (
-    <div className="w-full p-6 mx-auto mb-4 space-y-2 leading-relaxed text-center text-gray-800 bg-white/90 glow-frame rounded-tl-[60px] rounded-br-[80px]">
+    <div className="w-full py-6 mx-auto mb-4 space-y-2 leading-relaxed text-center text-gray-800 bg-white/90 glow-frame rounded-tl-[40px] rounded-br-[60px] px-4">
 
       <p className="text-[1rem] no-bg">
         Je m'appelle <strong>Latifa</strong>. Après plus de vingt ans dans le métier d'infirmière, 
@@ -41,21 +41,31 @@ const About: React.FC<AboutProps> = ({
          <CTAButton href={amazonLink} variant="button-gold">Voir sur Amazon</CTAButton>
         </div>
 
-        {/* Grille de livres */}
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center">
-          {books.map((book: Book, i: number) => (
-            <div
-              key={i}
-              className="flex flex-col items-center w-40 h-40 p-1 text-center transition-all duration-300 shadow-lg hover:shadow-xl no-bg backdrop-blur-sm"
-            >
-              <div className="w-12 h-12 mb-1 overflow-hidden sm:w-20 sm:h-20">
-                <img src={book.img} alt={book.title} className="object-contain w-full h-full" loading="lazy" />
-              </div>
-              <h4 className="text-base font-semibold text-[#cba95c] drop-shadow-sm mb-0.5">{book.title}</h4>
-              <p className="text-xs leading-snug text-gray-800">{book.desc}</p>
-            </div>
-          ))}
-        </div>
+    {/* Grille de livres */}
+<div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center">
+  {books.map((book: Book, i: number) => (
+    <div
+      key={i}
+      className="flex flex-col items-center justify-center w-40 h-48 px-1 py-2 text-center transition-all duration-300 shadow-[0_6px_15px_rgba(224,175,71,0.35)] sm:w-56 hover:shadow-[0_6px_25px_rgba(203,169,92,0.25)] no-bg backdrop-blur-sm sm:h-48"
+    >
+      <div className="flex items-center justify-center overflow-hidden h-18 w-18 sm:w-22 sm:h-22">
+        <img
+          src={book.img}
+          alt={book.title}
+          className="object-contain w-full h-full"
+          loading="lazy"
+        />
+      </div>
+      <h4 className="text-sm sm:text-base font-semibold text-[#cba95c] drop-shadow-sm">
+        {book.title}
+      </h4>
+      <p className="text-xs leading-snug text-gray-800 sm:text-xs">
+        {book.desc}
+      </p>
+    </div>
+  ))}
+</div>
+
 
         <p className="mt-4 text-[1rem]">
           <strong className="no-bg">Apprendre en s’amusant, c’est possible !</strong><br />

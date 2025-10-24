@@ -213,7 +213,6 @@ const Home: React.FC<HomeProps> = ({
       </section>
     </div>
 
-
     <Section id="contact" title="Avis & Contact" noMarginTop>
       <Contact />
     </Section>

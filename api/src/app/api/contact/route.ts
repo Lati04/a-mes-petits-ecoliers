@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 
 export const runtime = "nodejs";
 
-// URL du frontend selon l'environnement
+// URL frontend selon environnement
 const FRONTEND_URL =
   process.env.NODE_ENV === "production"
     ? "https://a-mes-petits-ecoliers.onrender.com"
@@ -21,7 +21,7 @@ export async function OPTIONS() {
   return NextResponse.json({}, { headers: corsHeaders });
 }
 
-// Mémoire pour limiter les requêtes
+// Limite anti-spam basique
 const lastSubmissions = new Map<string, number>();
 const RATE_LIMIT_MS = 30_000;
 
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       return NextResponse.json(
-        { error: "Adresse email invalide." },
+        { error: "Adresse e-mail invalide." },
         { status: 400, headers: corsHeaders }
       );
     }
@@ -47,38 +47,37 @@ export async function POST(req: NextRequest) {
     }
     lastSubmissions.set(email, now);
 
-    // Transporteur nodemailer
+    // Transporteur Brevo (Sendinblue)
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
+      host: "smtp-relay.sendinblue.com",
+      port: 587,
       auth: {
-        user: process.env.CONTACT_EMAIL,
-        pass: process.env.CONTACT_PASSWORD,
+        user: process.env.BREVO_EMAIL,   
+        pass: process.env.BREVO_API_KEY, 
       },
     });
 
-    // Email à toi
+    // Envoi du mail 
     await transporter.sendMail({
-      from: `"Site Coloriages" <${process.env.CONTACT_EMAIL}>`,
-      to: process.env.CONTACT_EMAIL,
-      subject: "Nouveau contact depuis le site",
-      text: `Email de l'utilisateur : ${email}`,
+      from: `"Site Coloriages" <${process.env.BREVO_EMAIL}>`,
+      to: process.env.BREVO_EMAIL,
+      subject: "📬 Nouveau contact depuis le site",
+      text: `Un visiteur a laissé son e-mail : ${email}`,
     });
 
-    // Email de confirmation à l’utilisateur
+    // Accusé de réception à l’utilisateur
     await transporter.sendMail({
-      from: `"Site Coloriages" <${process.env.CONTACT_EMAIL}>`,
+      from: `"Latifa - À mes petits écoliers" <${process.env.BREVO_EMAIL}>`,
       to: email,
-      subject: "Merci pour ton message 🌸",
-      text: `Bonjour ! Merci pour ton contact. Je te répondrai dès que possible.\n\nLatifa 🌷`,
+      subject: "Merci pour ton message 🌷",
+      text: `Bonjour 🌸\n\nMerci d’avoir pris contact ! Je te répondrai dès que possible.\n\nLatifa`,
     });
 
     return NextResponse.json({ success: true }, { headers: corsHeaders });
   } catch (err) {
     console.error("Erreur /api/contact :", err);
     return NextResponse.json(
-      { error: "Erreur serveur" },
+      { error: "Erreur lors de l’envoi de l’e-mail." },
       { status: 500, headers: corsHeaders }
     );
   }

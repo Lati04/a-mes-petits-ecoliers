@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ navItems = defaultNavItems }) => {
   };
 
   return (
-    <header className="w-full px-4 py-2 sticky top-0 z-50 header-rainbow backdrop-blur-md shadow-[0_6px_15px_rgba(224,175,71,0.25)] dark:bg-[#3d2e00]/90 dark:shadow-[0_6px_15px_rgba(224,175,71,0.4)] transition-all duration-300 font-baloo">
+    <header className="w-full px-4 py-2 sticky top-0 z-50 header-rainbow backdrop-blur-md shadow-[0_6px_15px_rgba(224,175,71,0.25)] transition-all duration-300 font-baloo">
       <nav className="flex items-center justify-between mx-auto">
         {/* ---------- LOGO + TITRE ---------- */}
         <CTAButton

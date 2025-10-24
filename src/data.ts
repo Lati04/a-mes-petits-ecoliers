@@ -155,30 +155,30 @@ export interface Book {
 }
 
 export const featuredBooks: Book[] = [
-  { title: "Tome 1 – J'apprends l'alphabet en coloriant", img: "/images/J'apprends l'alphabet  de A à Z en coloriant.png", link: "https://www.amazon.fr/dp/B0FRXB2YLT", price: 10.54 },
-  { title: "Tome 2 – J'apprends les couleurs en coloriant", img: "/images/j'apprends les couleurs en coloriant (5).png", link: "https://www.amazon.fr/dp/B0FR4FRFTR", price: 10.54 },
-  { title: "Tome 3 – J'apprends à compter en coloriant", img: "/images/j'apprends à compter en coloriant.png", link: "https://www.amazon.fr/dp/B0FRLVGVHW", price: 16.55 },
-  { title: "Tome 4 – Bienvenue dans l'univers du mandala à colorier", img: "/images/J’apprends à me détendre avec les mandala par À mes petits écoliers (21.59 x 27.94 cm).png", link: "https://www.amazon.fr/dp/B0FR46XSWV", price: 11.99 },
-  { title: "Tome 5 – Bienvenue dans l'univers du manga à colorier", img: "/images/j'apprends à colorier des mangas.png", link: "https://www.amazon.fr/dp/B0FRMKQPYW", price: 10.54 },
-  { title: "Tome 6 – Bienvenue dans l'univers du kawaii à colorier", img: "/images/Bienvenue dans l'univers du kawaii à colorier.png", link: "https://www.amazon.fr/dp/B0FS1893ZH", price: 13.19 },
-  { title: "Tome 7 – J'apprends l'empathie en coloriant", img: "/images/J'apprends l'empathie en coloriant.png", link: "https://www.amazon.fr/dp/B0FSK4N526", price: 10.54 },
-  { title: "Tome 8 – J'apprends la bienveillance en coloriant", img: "/images/J'apprends la bienveillance en coloriant (1).png", link: "https://www.amazon.fr/dp/B0FSZPR6MY", price: 10.54 },
-  { title: "Tome 9 – J'apprends le respect et le courage (anti-harcèlement)", img: "/images/j'apprends le respect et le courage en coloriant.png", link: "https://www.amazon.fr/dp/B0FTRGMNNN", price: 11.59 },
-  { title: "Tome 10 – J'apprends à m'organiser en coloriant", img: "/images/j'apprends à m'organiser en coloriant.png", link: "https://www.amazon.fr/dp/B0FVX9R9D1", price: 11.59 },
+  { title: "Tome 1 – J'apprends l'alphabet en coloriant", img: "/images/J'apprends l'alphabet  de A à Z en coloriant.jpg", link: "https://www.amazon.fr/dp/B0FRXB2YLT", price: 10.54 },
+  { title: "Tome 2 – J'apprends les couleurs en coloriant", img: "/images/j'apprends les couleurs en coloriant.jpg", link: "https://www.amazon.fr/dp/B0FR4FRFTR", price: 10.54 },
+  { title: "Tome 3 – J'apprends à compter en coloriant", img: "/images/j'apprends à compter en coloriant.jpg", link: "https://www.amazon.fr/dp/B0FRLVGVHW", price: 16.55 },
+  { title: "Tome 4 – Bienvenue dans l'univers du mandala à colorier", img: "/images/J’apprends à me détendre avec les mandala par À mes petits écoliers (21.59 x 27.94 cm).jpg", link: "https://www.amazon.fr/dp/B0FR46XSWV", price: 11.99 },
+  { title: "Tome 5 – Bienvenue dans l'univers du manga à colorier", img: "/images/j'apprends à colorier des mangas.jpg", link: "https://www.amazon.fr/dp/B0FRMKQPYW", price: 10.54 },
+  { title: "Tome 6 – Bienvenue dans l'univers du kawaii à colorier", img: "/images/Bienvenue dans l'univers du kawaii à colorier.jpg", link: "https://www.amazon.fr/dp/B0FS1893ZH", price: 13.19 },
+  { title: "Tome 7 – J'apprends l'empathie en coloriant", img: "/images/J'apprends l'empathie en coloriant.jpg", link: "https://www.amazon.fr/dp/B0FSK4N526", price: 10.54 },
+  { title: "Tome 8 – J'apprends la bienveillance en coloriant", img: "/images/J'apprends la bienveillance en coloriant.jpg", link: "https://www.amazon.fr/dp/B0FSZPR6MY", price: 10.54 },
+  { title: "Tome 9 – J'apprends le respect et le courage (anti-harcèlement)", img: "/images/j'apprends le respect et le courage en coloriant.jpg", link: "https://www.amazon.fr/dp/B0FTRGMNNN", price: 11.59 },
+  { title: "Tome 10 – J'apprends à m'organiser en coloriant", img: "/images/j'apprends à m'organiser en coloriant.jpg", link: "https://www.amazon.fr/dp/B0FVX9R9D1", price: 11.59 },
 ];
 
 
 export const books: Book[] = [
-  { title: "Alphabet", desc: "Découvrir les lettres de A à Z avec des animaux amusants.", img: "/images/J'apprends l'alphabet  de A à Z en coloriant.png" },
-  { title: "Chiffres", desc: "Apprendre à compter jusqu’à 100 en coloriant.", img: "/images/j'apprends à compter en coloriant.png" },
-  { title: "Couleurs", desc: "Explorer et reconnaître les teintes en s’amusant.", img: "/images/j'apprends les couleurs en coloriant (5).png" },
-  { title: "Mandalas", desc: "Se détendre et développer la créativité dès 8 ans.", img: "/images/J’apprends à me détendre avec les mandala par À mes petits écoliers (21.59 x 27.94 cm).png" },
-  { title: "Manga", desc: "Découvrir des scènes inspirées du style japonais.", img: "/images/j'apprends à colorier des mangas.png" },
-  { title: "Kawaii", desc: "Exprimer la douceur et la fantaisie à travers des coloriages mignons.", img: "/images/Bienvenue dans l'univers du kawaii à colorier.png" },
-  { title: "Empathie", desc: "Apprendre la gentillesse et la compréhension des émotions.", img: "/images/J'apprends l'empathie en coloriant.png" },
-  { title: "Bienveillance", desc: "Cultiver le respect et l’attention à soi et aux autres.", img: "/images/J'apprends la bienveillance en coloriant (1).png" },
-  { title: "Respect & Courage", desc: "Sensibiliser à la solidarité et à l’anti-harcèlement.", img: "/images/j'apprends le respect et le courage en coloriant.png" },
-  { title: "Organisation", desc: "Apprendre à planifier et équilibrer effort et plaisir.", img: "/images/j'apprends à m'organiser en coloriant.png" },
+  { title: "Alphabet", desc: "Découvrir les lettres de A à Z avec des animaux amusants.", img: "/images/J'apprends l'alphabet  de A à Z en coloriant.jpg" },
+  { title: "Chiffres", desc: "Apprendre à compter jusqu’à 100 en coloriant.", img: "/images/j'apprends les couleurs en coloriant.jpg" },
+  { title: "Couleurs", desc: "Explorer et reconnaître les teintes en s’amusant.", img: "/images/j'apprends à compter en coloriant.jpg" },
+  { title: "Mandalas", desc: "Se détendre et développer la créativité dès 8 ans.", img: "/images/J’apprends à me détendre avec les mandala par À mes petits écoliers (21.59 x 27.94 cm).jpg" },
+  { title: "Manga", desc: "Découvrir des scènes inspirées du style japonais.", img: "/images/j'apprends à colorier des mangas.jpg" },
+  { title: "Kawaii", desc: "Exprimer la douceur et la fantaisie à travers des coloriages mignons.", img: "/images/Bienvenue dans l'univers du kawaii à colorier.jpg" },
+  { title: "Empathie", desc: "Apprendre la gentillesse et la compréhension des émotions.", img: "/images/J'apprends l'empathie en coloriant.jpg" },
+  { title: "Bienveillance", desc: "Cultiver le respect et l’attention à soi et aux autres.", img: "/images/J'apprends la bienveillance en coloriant.jpg" },
+  { title: "Respect & Courage", desc: "Sensibiliser à la solidarité et à l’anti-harcèlement.", img: "/images/j'apprends le respect et le courage en coloriant.jpg" },
+  { title: "Organisation", desc: "Apprendre à planifier et équilibrer effort et plaisir.", img: "/images/j'apprends à m'organiser en coloriant.jpg" },
 ];
 
 export const bookDescriptions: Record<string, string> = {

@@ -81,7 +81,7 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
   };
 
   return (
-    <div className="w-full mx-auto px-4 py-12 mb-7 mt-4 bg-white/60 backdrop-blur-md shadow-[0_4px_18px_rgba(203,169,92,0.25)] hover:shadow-[0_6px_25px_rgba(203,169,92,0.35)] transition-shadow duration-300 text-gray-800
+    <div className="w-full mx-auto px-4 py-12 mb-7 mt-4 bg-white/60 backdrop-blur-md shadow-[0_4px_18px_rgba(203,169,92,0.25)] hover:shadow-[0_6px_25px_rgba(203,169,92,0.25)] transition-shadow duration-300 text-gray-800
       max-w-7xl rounded-bl-[60px] rounded-br-[60px]">
       {/* ---------- Commentaires ---------- */}
       <p className="mb-2 font-bold text-center text-gray-700">
@@ -135,12 +135,12 @@ const Contact: React.FC<ContactProps> = ({ apiUrl = API_URL }) => {
         </p>
 
         {privateError && (
-          <p className="p-2 mb-3 text-center text-red-700 rounded-none glow-frame">
+          <p className="max-w-2xl p-2 mx-auto mb-3 text-center text-red-700 rounded-none glow-frame">
             ⚠️ {privateError}
           </p>
         )}
         {privateSent && (
-          <p className="p-2 mb-3 text-center text-green-700 rounded-none glow-frame">
+          <p className="max-w-2xl p-2 mx-auto mb-3 text-center text-green-700 rounded-none glow-frame">
             ✅ Merci ! Ton email a bien été envoyé.
           </p>
         )}

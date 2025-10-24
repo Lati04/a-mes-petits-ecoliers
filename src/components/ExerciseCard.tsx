@@ -16,7 +16,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({ exercise }) => {
       aria-labelledby={`exercise-modal-title-${exercise.title}`}
     >
      <div
-      className="relative w-full max-w-lg md:max-w-2xl p-4 md:p-6 bg-[#f9f5ec] shadow-lg max-h-[70vh] overflow-y-auto flex flex-col items-center animate-scaleIn"
+      className="relative w-full max-w-lg md:max-w-2xl p-4 md:p-6 bg-[#f9f5ec] shadow-[0_6px_25px_rgba(203,169,92,0.85)]  hover:shadow-[0_6px_25px_rgba(203,169,92,0.55)] max-h-[70vh] overflow-y-auto flex flex-col items-center animate-scaleIn"
       onClick={(e) => e.stopPropagation()}
     >
         <CTAButton
@@ -63,7 +63,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({ exercise }) => {
   return (
     <>
       <div
-        className="p-3 transition-transform duration-300 shadow-md cursor-pointer bg-white/80 hover:shadow-lg hover:-translate-y-1"
+        className="p-3 transition-transform duration-300 shadow-[0_6px_25px_rgba(203,169,92,0.35)]  hover:shadow-[0_6px_25px_rgba(203,169,92,0.25)] cursor-pointer bg-white/80 hover:-translate-y-1"
         onClick={() => setShowModal(true)}
         aria-label={`Ouvrir les détails de l'exercice ${exercise.title}`}
       >
